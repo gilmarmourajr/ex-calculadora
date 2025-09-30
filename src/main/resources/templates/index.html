@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora</title>
+</head>
+<body>
+    <h1>Calculadora</h1>
+    <form th:action="@{/calcular}" method="post">
+        <div>
+            <label for="valor1">Valor 1</label>
+            <input type="number" name="valor1" id="valor1" placeholder="Informe o valor 1" required>
+        </div>
+        <div>
+            <label for="valor2">Valor 2</label>
+            <input type="number" name="valor2" id="valor2" placeholder="Informe o valor 2" required>
+        </div>
+        <fieldset>
+            <legend>Selecione a operação:</legend>
+            <div>
+                <input type="radio" id="soma" name="operacao" value="soma" checked>
+                <label for="soma">Soma</label>
+
+                <input type="radio" id="subtracao" name="operacao" value="subtracao">
+                <label for="subtracao">Subtração</label>
+
+                <input type="radio" id="multiplicacao" name="operacao" value="multiplicacao">
+                <label for="multiplicacao">Multiplicação</label>
+
+                <input type="radio" id="divisao" name="operacao" value="divisao">
+                <label for="divisao">Divisão</label>
+
+            </div>
+        </fieldset>
+        <button type="submit">Calcular</button>
+    </form>
+</body>
+</html>
