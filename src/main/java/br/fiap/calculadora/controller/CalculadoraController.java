@@ -8,21 +8,42 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
 
+
 @Controller
 public class CalculadoraController {
+
     private CalculadoraService service;
 
-    public CalculadoraController(CalculadoraService service) {
+    public CalculadoraController(CalculadoraService service){
         this.service = service;
     }
 
-    @PostMapping("/calcular")
-    public String calcular(@RequestParam String valor1,
-                           @RequestParam String valor2,
-                           @RequestParam String operacao,
-                           Model model) {
-        BigDecimal resultado = service.calcular(valor1,  valor2, operacao);
+   /* @PostMapping("/calculadora")
+    public String calculadora(@RequestParam double num1, @RequestParam double num2, @RequestParam String operador, Model model){
+
+        model.addAttribute("resultado", service.calcular(num1,num2,operador));
+
+        return "index";
+    }*/
+
+    @PostMapping("/calculadora")
+    public String calculadora(@RequestParam String num1, @RequestParam String num2, @RequestParam String operador, Model model){
+
+        String erro = "";
+        BigDecimal resultado = null;
+
+        try {
+            resultado = service.calcular(num1, num2, operador);
+        } catch (Exception e){
+            erro = e.getMessage();
+        }
+        model.addAttribute("num1", num1);
+        model.addAttribute("num2", num2);
         model.addAttribute("resultado", resultado);
+        model.addAttribute("erro",erro);
+        model.addAttribute("operacao", operador);
+
         return "index";
     }
+
 }

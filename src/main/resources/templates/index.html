@@ -1,38 +1,46 @@
+
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Calculadora</title>
+    <title>Title</title>
 </head>
 <body>
-    <h1>Calculadora</h1>
-    <form th:action="@{/calcular}" method="post">
-        <div>
-            <label for="valor1">Valor 1</label>
-            <input type="number" name="valor1" id="valor1" placeholder="Informe o valor 1" required>
-        </div>
-        <div>
-            <label for="valor2">Valor 2</label>
-            <input type="number" name="valor2" id="valor2" placeholder="Informe o valor 2" required>
-        </div>
-        <fieldset>
-            <legend>Selecione a operação:</legend>
-            <div>
-                <input type="radio" id="soma" name="operacao" value="soma" checked>
-                <label for="soma">Soma</label>
+<form th:action="@{/calculadora}" method="post">
+    <label>Primeiro número</label>
+    <input type="number" name="num1" th:value="${valor1}" required>
 
-                <input type="radio" id="subtracao" name="operacao" value="subtracao">
-                <label for="subtracao">Subtração</label>
+    <label>Segundo número</label>
+    <input type="number" name="num2" th:value="${valor2}" required>
 
-                <input type="radio" id="multiplicacao" name="operacao" value="multiplicacao">
-                <label for="multiplicacao">Multiplicação</label>
+    <div>
+        <p>Selecione o operador</p>
 
-                <input type="radio" id="divisao" name="operacao" value="divisao">
-                <label for="divisao">Divisão</label>
+        <fieldset required>
+        <input type="radio" id="operador" name="operador" value="+" th:checked="${operacao} == '+' ">
+        <label for="operador">Adição</label>
 
-            </div>
+        <input type="radio" id="subtracao" name="operador" value="-" th:checked="${operacao} == '-' ">
+        <label for="subtracao">Subtração</label>
+
+        <input type="radio" id="multiplicacao" name="operador" value="*" th:checked="${operacao} == '*' ">
+        <label for="multiplicacao">Multiplicação</label>
+
+        <input type="radio" id="divisao" name="operador" value="/" th:checked="${operacao} == '/' ">
+        <label for="divisao">Divisão</label>
         </fieldset>
-        <button type="submit">Calcular</button>
-    </form>
+
+
+    </div>
+
+    <button type="submit">Calcular</button>
+
+</form>
+
+<section  th:if="${resultado != null}">
+    <p>Resultado: <strong th:text="${resultado}"></strong></p>
+</section>
+<p th:text="${erro}"></p>
+
 </body>
 </html>
